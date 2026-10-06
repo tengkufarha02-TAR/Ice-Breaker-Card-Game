@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect & Lead — 150 Card Deck</title>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent-mint:#14caa0; --accent-blue:#3f7dff; --accent-violet:#9161ff;
+  }
+  :root{
+    --bg:#f4f6fb; --bg2:#eef1f8; --panel:#ffffff; --panel-line:rgba(15,20,35,.10);
+    --ink:#0c1120; --ink-dim:#525a72; --card-front:#f9fafc; --card-back:#ffffff;
+    --mint:#0ea678; --blue:#2f6fed; --violet:#7c3aed; --deep:#0c1120;
+    --shadow: 0 20px 60px rgba(20,25,45,.14);
+    --ring-track: rgba(12,17,32,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#05060c; --bg2:#080a14; --panel:rgba(15,19,34,.68); --panel-line:rgba(255,255,255,.09);
+      --ink:#f1f6f3; --ink-dim:#a9b6bd; --card-front:#0b0e1c; --card-back:#0c1020;
+      --mint:#3fe6ab; --blue:#5b96ff; --violet:#a985ff; --deep:#05060c;
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --ring-track: rgba(255,255,255,.10);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#05060c; --bg2:#080a14; --panel:rgba(15,19,34,.68); --panel-line:rgba(255,255,255,.09);
+    --ink:#f1f6f3; --ink-dim:#a9b6bd; --card-front:#0b0e1c; --card-back:#0c1020;
+    --mint:#3fe6ab; --blue:#5b96ff; --violet:#a985ff; --deep:#05060c;
+    --shadow: 0 24px 70px rgba(0,0,0,.55);
+    --ring-track: rgba(255,255,255,.10);
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f6fb; --bg2:#eef1f8; --panel:#ffffff; --panel-line:rgba(15,20,35,.10);
+    --ink:#0c1120; --ink-dim:#525a72; --card-front:#f9fafc; --card-back:#ffffff;
+    --mint:#0ea678; --blue:#2f6fed; --violet:#7c3aed; --deep:#0c1120;
+    --shadow: 0 20px 60px rgba(20,25,45,.14);
+    --ring-track: rgba(12,17,32,.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  .stage{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 8% -5%, color-mix(in srgb, var(--mint) 20%, transparent), transparent),
+      radial-gradient(ellipse 800px 600px at 100% 10%, color-mix(in srgb, var(--blue) 20%, transparent), transparent),
+      radial-gradient(ellipse 900px 700px at 40% 105%, color-mix(in srgb, var(--violet) 22%, transparent), transparent),
+      var(--bg);
+  }
+  h1,h2,h3,.disp{font-family:"Space Grotesk",system-ui,sans-serif;}
+  button{font-family:inherit; cursor:pointer;}
+  button:focus-visible, [tabindex]:focus-visible, input:focus-visible{outline:3px solid var(--blue); outline-offset:3px;}
+  a{color:inherit;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:28px 20px 60px;}
+  .topline{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:26px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:42px;height:42px;border-radius:12px; flex:0 0 auto;
+    background:linear-gradient(135deg,var(--accent-mint),var(--accent-blue) 55%,var(--accent-violet));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px color-mix(in srgb, var(--accent-blue) 35%, transparent);
+  }
+  .brand-mark svg{color:#04110b; width:22px; height:22px;}
+  .brand h1{font-size:1.18rem; margin:0; font-weight:700; letter-spacing:-.01em;}
+  .brand p{margin:1px 0 0; font-size:.8rem; color:var(--ink-dim);}
+  .theme-toggle{
+    display:flex; gap:4px; padding:4px; border-radius:999px; background:var(--panel); border:1px solid var(--panel-line);
+  }
+  .theme-toggle button{
+    width:32px;height:32px;border-radius:999px;border:none;background:transparent;color:var(--ink-dim);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .theme-toggle button.active{background:var(--ink); color:var(--bg);}
+  .theme-toggle svg{width:15px;height:15px;}
+
+  /* ---------- START SCREEN ---------- */
+  .panel{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:26px;
+    box-shadow:var(--shadow); backdrop-filter:blur(18px);
+  }
+  .start-grid{display:grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap:22px;}
+  @media (max-width:900px){ .start-grid{grid-template-columns:1fr;} }
+
+  .deck-hero{ padding:38px 34px; position:relative; overflow:hidden; }
+  .deck-visual{ position:relative; width:190px; height:250px; margin:6px auto 26px; }
+  .stack-card{
+    position:absolute; inset:0; border-radius:20px; border:1px solid var(--panel-line);
+    background:linear-gradient(155deg, var(--card-front), color-mix(in srgb, var(--blue) 8%, var(--card-front)));
+    box-shadow:0 16px 40px rgba(0,0,0,.18);
+  }
+  .stack-card:nth-child(1){ transform:rotate(-9deg) translateX(-14px); }
+  .stack-card:nth-child(2){ transform:rotate(6deg) translateX(10px); }
+  .stack-card:nth-child(3){
+    transform:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    background:linear-gradient(160deg, color-mix(in srgb, var(--mint) 18%, var(--card-front)), color-mix(in srgb, var(--violet) 18%, var(--card-front)));
+  }
+  .stack-card:nth-child(3) svg{width:40px;height:40px; color:var(--blue);}
+  .stack-card:nth-child(3) span{font-size:.72rem; font-weight:700; letter-spacing:.02em; color:var(--ink-dim);}
+  .deck-hero h2{font-size:1.7rem; margin:0 0 10px; text-align:center; font-weight:700; letter-spacing:-.02em;}
+  .deck-hero p.lead{text-align:center; color:var(--ink-dim); font-size:.97rem; line-height:1.55; max-width:420px; margin:0 auto;}
+
+  .setup{padding:30px 30px 32px;}
+  .setup h3{font-size:1rem; margin:0 0 4px;}
+  .field-label{font-size:.78rem; font-weight:700; color:var(--ink-dim); text-transform:none; margin:20px 0 10px; display:block;}
+  .field-label:first-of-type{margin-top:4px;}
+
+  .mode-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .mode-card{
+    text-align:left; border-radius:14px; border:1px solid var(--panel-line); background:transparent;
+    padding:12px 13px; color:var(--ink); transition:.18s ease;
+  }
+  .mode-card strong{display:block; font-size:.86rem; margin-bottom:2px;}
+  .mode-card span{font-size:.74rem; color:var(--ink-dim); line-height:1.35; display:block;}
+  .mode-card.active{
+    border-color:transparent;
+    background:linear-gradient(135deg, color-mix(in srgb, var(--mint) 16%, var(--panel)), color-mix(in srgb, var(--violet) 14%, var(--panel)));
+    box-shadow:0 0 0 1.5px var(--blue) inset;
+  }
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{
+    border-radius:999px; border:1px solid var(--panel-line); background:transparent; color:var(--ink);
+    padding:7px 13px; font-size:.78rem; font-weight:600; display:flex; align-items:center; gap:6px;
+  }
+  .chip .dot{width:7px;height:7px;border-radius:999px; background:var(--dot,var(--blue));}
+  .chip.active{ color:#04110b; border-color:transparent; background:var(--dot,var(--blue)); font-weight:700; }
+
+  .players-row{display:flex; gap:8px;}
+  .players-row input{
+    flex:1; border-radius:12px; border:1px solid var(--panel-line); background:var(--bg2); color:var(--ink);
+    padding:11px 13px; font-size:.85rem;
+  }
+  .players-row input::placeholder{color:var(--ink-dim);}
+  .tag-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .tag{
+    background:var(--bg2); border:1px solid var(--panel-line); border-radius:999px; padding:5px 10px 5px 12px;
+    font-size:.78rem; display:flex; align-items:center; gap:6px;
+  }
+  .tag button{background:none;border:none;color:var(--ink-dim); display:flex; padding:0;}
+  .tag button svg{width:13px;height:13px;}
+
+  .toggle-row{display:flex; align-items:center; justify-content:space-between; padding:11px 2px;}
+  .toggle-row div strong{font-size:.85rem; display:block;}
+  .toggle-row div span{font-size:.76rem; color:var(--ink-dim);}
+  .switch{width:40px; height:23px; border-radius:999px; background:var(--ring-track); border:none; position:relative; flex:0 0 auto;}
+  .switch::after{content:""; position:absolute; width:17px;height:17px; border-radius:999px; background:var(--panel); top:3px; left:3px; box-shadow:0 1px 4px rgba(0,0,0,.25); transition:.18s ease;}
+  .switch.on{background:linear-gradient(135deg,var(--accent-mint),var(--accent-blue));}
+  .switch.on::after{left:20px; background:#fff;}
+
+  .start-btn{
+    width:100%; margin-top:22px; border:none; border-radius:15px; padding:15px 20px;
+    font-size:.98rem; font-weight:700; color:#04110b;
+    background:linear-gradient(105deg,var(--accent-mint),var(--accent-blue) 55%,var(--accent-violet));
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    box-shadow:0 16px 34px color-mix(in srgb, var(--accent-blue) 30%, transparent);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .start-btn:hover{transform:translateY(-2px); box-shadow:0 20px 42px color-mix(in srgb, var(--accent-blue) 40%, transparent);}
+  .start-btn svg{width:17px;height:17px;}
+  .start-hint{text-align:center; font-size:.74rem; color:var(--ink-dim); margin-top:10px;}
+
+  /* ---------- PLAY SCREEN ---------- */
+  .hidden{display:none !important;}
+  .play-grid{display:grid; grid-template-columns: 210px minmax(0,1fr) 260px; gap:20px; align-items:start;}
+  @media (max-width:1050px){ .play-grid{grid-template-columns:1fr;} }
+
+  .rail{padding:20px; position:sticky; top:20px;}
+  @media (max-width:1050px){ .rail{position:static;} }
+  .rail h4{font-size:.78rem; margin:0 0 12px; color:var(--ink-dim); font-weight:700;}
+  .stat-row{display:flex; align-items:baseline; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--panel-line);}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row span:first-child{font-size:.8rem; color:var(--ink-dim);}
+  .stat-row strong{font-size:1rem; font-family:"Space Grotesk",sans-serif;}
+  .exit-btn{
+    margin-top:18px; width:100%; border-radius:12px; border:1px solid var(--panel-line); background:transparent;
+    color:var(--ink-dim); padding:10px; font-size:.8rem; font-weight:600;
+  }
+  .howto-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; counter-reset:step; }
+  .howto-list li{ display:flex; gap:9px; align-items:flex-start; }
+  .howto-list li::before{
+    counter-increment:step; content:counter(step);
+    flex:0 0 auto; width:20px;height:20px;border-radius:7px; font-size:.68rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ring-track); color:var(--ink-dim); font-family:"Space Grotesk",sans-serif;
+  }
+  .howto-list li strong{display:block; font-size:.79rem; font-weight:700;}
+  .howto-list li span{display:block; font-size:.74rem; color:var(--ink-dim); line-height:1.35; margin-top:1px;}
+
+  .mode-guidance{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--panel-line); }
+  .mode-guidance .mg-top{display:flex; align-items:center; gap:8px;}
+  .mode-guidance .dot{width:8px;height:8px;border-radius:999px; background:var(--mint); animation:pulseDot 1.8s ease-in-out infinite;}
+  @keyframes pulseDot{ 50%{transform:scale(1.5); opacity:.5;} }
+  .mode-guidance h5{margin:8px 0 4px; font-size:1rem; font-family:"Space Grotesk",sans-serif;}
+  .mode-guidance p{margin:0; font-size:.8rem; color:var(--ink-dim); line-height:1.45;}
+
+  .log-head{display:flex; align-items:center; justify-content:space-between; cursor:pointer; list-style:none;}
+  .log-head::-webkit-details-marker{display:none;}
+  .log-head strong{font-size:.79rem; font-weight:700;}
+  .log-count{font-size:.71rem; font-weight:700; color:var(--ink-dim); background:var(--ring-track); border-radius:999px; padding:2px 9px;}
+  .log-item-row{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
+  .log-actions{display:flex; gap:2px; flex:0 0 auto;}
+  .copy-btn{ background:none; border:none; color:var(--ink-dim); padding:3px; display:flex; border-radius:6px; }
+  .copy-btn:hover{ color:var(--ink); background:var(--ring-track); }
+  .copy-btn svg{width:14px;height:14px;}
+  .empty-log{font-size:.76rem; color:var(--ink-dim); padding:10px 0;}
+
+  .stage-col{display:flex; flex-direction:column; align-items:center; gap:16px;}
+  .turn-chip{
+    display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px;
+    background:linear-gradient(135deg, color-mix(in srgb, var(--violet) 22%, var(--panel)), color-mix(in srgb, var(--blue) 18%, var(--panel)));
+    border:1px solid var(--panel-line); font-size:.82rem; font-weight:700;
+  }
+  .turn-chip svg{width:14px;height:14px; color:var(--violet);}
+
+  .table{ width:100%; display:flex; justify-content:center; align-items:center; gap:0; position:relative; min-height:400px;}
+  .mini-deck{ width:72px; flex:0 0 auto; position:relative; height:96px; margin-right:-6px; display:none;}
+  @media (min-width:700px){ .mini-deck{display:block;} }
+  .mini-deck .msc{ position:absolute; inset:0; border-radius:11px; border:1px solid var(--panel-line); background:var(--card-front); box-shadow:0 8px 18px rgba(0,0,0,.16);}
+  .mini-deck .msc:nth-child(1){transform:translate(4px,4px) rotate(4deg);}
+  .mini-deck .msc:nth-child(2){transform:translate(2px,2px) rotate(2deg);}
+  .mini-deck .msc:nth-child(3){display:flex;align-items:center;justify-content:center; font-size:.7rem; font-weight:800; color:var(--ink-dim); font-family:"Space Grotesk",sans-serif;}
+
+  .card-zone{ width:min(100%,420px); }
+  .game-card{
+    width:100%; min-height:440px; position:relative; border-radius:26px; overflow:hidden;
+    border:1px solid var(--panel-line); box-shadow:var(--shadow);
+    background:var(--card-front);
+    display:flex; flex-direction:column;
+  }
+  .game-card.dealt{animation:deal .5s cubic-bezier(.2,.85,.25,1) both;}
+  @keyframes deal{ from{opacity:0; transform:translateY(20px) scale(.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+
+  .card-top{
+    padding:22px 24px 26px;
+    background:linear-gradient(155deg, var(--cat-a,var(--mint)) -10%, var(--cat-b,var(--blue)) 115%);
+    color:#fff; display:flex; flex-direction:column; gap:14px;
+  }
+  .card-top .ftop{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .cat-pill{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 11px; border-radius:999px;
+    background:rgba(255,255,255,.16); backdrop-filter:blur(6px); font-size:.72rem; font-weight:700; color:#fff;
+  }
+  .cat-pill svg{width:12px;height:12px;}
+  .card-idx{font-family:"Space Grotesk",sans-serif; font-size:.72rem; font-weight:700; color:rgba(255,255,255,.85);}
+  .card-motif{ width:34px;height:34px; border-radius:10px; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .card-motif svg{ width:18px; height:18px; color:#fff; }
+  .question{
+    font-family:"Space Grotesk",sans-serif; font-weight:600; letter-spacing:-.01em;
+    font-size:clamp(1.3rem,4vw,1.7rem); line-height:1.26; margin:0;
+  }
+  .card-title{font-size:.78rem; font-weight:700; color:rgba(255,255,255,.85); margin:0;}
+
+  .card-bottom{ padding:20px 24px 24px; display:flex; flex-direction:column; flex:1; }
+  .timer-wrap{display:flex; align-items:center; gap:10px; margin:0 0 16px;}
+  .ring{width:36px;height:36px; flex:0 0 auto;}
+  .ring circle{fill:none; stroke-width:4;}
+  .ring .track{stroke:var(--ring-track);}
+  .ring .prog{stroke:var(--blue); stroke-linecap:round; transform:rotate(-90deg); transform-origin:50% 50%; transition:stroke-dashoffset 1s linear;}
+  .timer-label{font-size:.78rem; color:var(--ink-dim); font-weight:600;}
+  .timer-btn{margin-left:auto; border:1px solid var(--panel-line); background:transparent; color:var(--ink); border-radius:9px; padding:6px 10px; font-size:.74rem; font-weight:700;}
+
+  .tips-heading{font-size:.72rem; font-weight:700; letter-spacing:.02em; color:var(--ink-dim); margin:0 0 8px;}
+  .tips{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px;}
+  .tips li{
+    font-size:.85rem; line-height:1.42; color:var(--ink); padding-left:15px; position:relative;
+  }
+  .tips li::before{content:""; position:absolute; left:0; top:.55em; width:5px;height:5px;border-radius:999px; background:var(--cat-a,var(--blue));}
+  .follow{ margin-top:auto; padding-top:16px; border-top:1px solid var(--panel-line); font-size:.8rem; color:var(--ink-dim);}
+  .follow strong{color:var(--ink); font-weight:700; display:block; margin-bottom:2px; font-size:.76rem;}
+
+  .controls{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+  .ctrl-btn{
+    border-radius:13px; padding:12px 20px; font-size:.86rem; font-weight:700; border:1px solid var(--panel-line);
+    background:var(--panel); color:var(--ink); display:flex; align-items:center; gap:7px;
+  }
+  .ctrl-btn svg{width:15px;height:15px;}
+  .ctrl-btn.primary{
+    border:none; color:#04110b; background:linear-gradient(105deg,var(--accent-mint),var(--accent-blue) 55%,var(--accent-violet));
+    box-shadow:0 14px 30px color-mix(in srgb, var(--accent-blue) 30%, transparent);
+  }
+  .hint-line{font-size:.74rem; color:var(--ink-dim); text-align:center;}
+
+  .side{padding:20px;}
+  .side h4{font-size:.9rem; margin:0 0 4px; font-weight:700;}
+  .side p.sub{font-size:.78rem; color:var(--ink-dim); margin:0 0 14px; line-height:1.4;}
+  .note-area{
+    width:100%; border-radius:13px; border:1px solid var(--panel-line); background:var(--bg2); color:var(--ink);
+    padding:11px 12px; font-size:.83rem; resize:vertical; min-height:90px; line-height:1.45;
+  }
+  .note-area::placeholder{color:var(--ink-dim);}
+  .save-note{
+    margin-top:8px; width:100%; border:none; border-radius:11px; padding:10px; font-size:.8rem; font-weight:700;
+    background:linear-gradient(105deg,var(--accent-mint),var(--accent-blue)); color:#04110b;
+  }
+  .log{margin-top:16px; display:flex; flex-direction:column; gap:8px; max-height:230px; overflow:auto;}
+  .log-item{border-left:2px solid var(--accent-blue); background:var(--bg2); border-radius:0 10px 10px 0; padding:8px 10px;}
+  .log-item p{margin:0; font-size:.72rem; font-weight:700; color:var(--ink-dim);}
+  .log-item span{font-size:.79rem; display:block; margin-top:2px; white-space:pre-wrap;}
+
+  /* ---------- END SCREEN ---------- */
+  .end-panel{padding:46px 30px; text-align:center;}
+  .end-badge{
+    width:72px;height:72px; border-radius:22px; margin:0 auto 20px;
+    background:linear-gradient(135deg,var(--accent-mint),var(--accent-blue) 55%,var(--accent-violet));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .end-badge svg{width:34px;height:34px; color:#04110b;}
+  .end-stats{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:22px 0 6px;}
+  .end-stat{background:var(--bg2); border:1px solid var(--panel-line); border-radius:14px; padding:14px 20px; min-width:110px;}
+  .end-stat strong{display:block; font-family:"Space Grotesk",sans-serif; font-size:1.4rem;}
+  .end-stat span{font-size:.72rem; color:var(--ink-dim); font-weight:600;}
+
+  .toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(120%);
+    opacity:0; visibility:hidden; pointer-events:none;
+    background:linear-gradient(105deg,var(--accent-mint),var(--accent-blue) 55%,var(--accent-violet)); color:#04110b;
+    padding:12px 20px; border-radius:13px; font-size:.85rem; font-weight:700; z-index:50;
+    box-shadow:0 16px 40px rgba(0,0,0,.3); display:flex; align-items:center; gap:9px;
+    transition:transform .35s cubic-bezier(.2,.85,.25,1), opacity .3s ease, visibility .3s;
+  }
+  .toast.show{transform:translateX(-50%) translateY(0); opacity:1; visibility:visible; pointer-events:auto;}
+  .toast svg{width:16px;height:16px;}
+
+  @media (max-width:640px){
+    .wrap{padding:16px 14px 40px;}
+    .topline{margin-bottom:18px;}
+    .brand h1{font-size:1.05rem;}
+    .brand p{font-size:.74rem;}
+    .deck-hero{padding:24px 18px;}
+    .deck-hero h2{font-size:1.35rem;}
+    .setup{padding:20px 18px 24px;}
+    .mode-grid{grid-template-columns:1fr;}
+    .rail, .side{padding:16px;}
+    .card-top{padding:20px 18px 22px;}
+    .card-bottom{padding:18px 18px 20px;}
+    .game-card{min-height:auto;}
+    .controls{flex-direction:column; width:100%;}
+    .ctrl-btn{width:100%; justify-content:center; padding:13px 18px;}
+    .end-panel{padding:34px 20px;}
+    .end-stats{gap:8px;}
+    .end-stat{padding:12px 16px; min-width:96px;}
+  }
+  @media (max-width:400px){
+    .mode-card, .chip{font-size:.76rem;}
+    .question{font-size:1.2rem;}
+  }
+  @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+<div class="wrap">
+
+  <div class="topline">
+    <div class="brand">
+      <div class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="12" height="16" rx="2" transform="rotate(-8 10 11)"/><rect x="8" y="5" width="12" height="16" rx="2" transform="rotate(8 14 13)"/></svg></div>
+      <div>
+        <h1>Connect &amp; Lead</h1>
+        <p>A 150-card conversation deck · by Tengku Farha</p>
+      </div>
+    </div>
+    <div class="theme-toggle" role="group" aria-label="Theme">
+      <button type="button" id="themeLight" title="Light mode"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="themeDark" title="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button>
+    </div>
+  </div>
+
+  <!-- START SCREEN -->
+  <section id="startScreen" class="start-grid">
+    <div class="panel deck-hero">
+      <div class="deck-visual">
+        <div class="stack-card"></div>
+        <div class="stack-card"></div>
+        <div class="stack-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+          <span>150 CARDS</span>
+        </div>
+      </div>
+      <h2>Every card starts a real conversation.</h2>
+      <p class="lead">Ice breakers, self-awareness, leadership and team challenges — draw a card and the question, tips, and follow-up are right there. Keep drawing for as long as the conversation lasts.</p>
+    </div>
+
+    <div class="panel setup">
+      <h3>Set up your round</h3>
+      <span class="field-label">Play mode</span>
+      <div class="mode-grid" id="modeGrid">
+        <button class="mode-card" data-mode="solo"><strong>Solo</strong><span>Private reflection, one card at a time</span></button>
+        <button class="mode-card" data-mode="pairs"><strong>Pairs</strong><span>Two people, one shared card</span></button>
+        <button class="mode-card" data-mode="group"><strong>Group</strong><span>Turns rotate around the table</span></button>
+        <button class="mode-card" data-mode="facilitator"><strong>Facilitator</strong><span>Guided session with a timer</span></button>
+      </div>
+
+      <div id="playersBlock" class="hidden">
+        <span class="field-label">Who's playing?</span>
+        <div class="players-row">
+          <input id="playerInput" type="text" placeholder="Type a name and press Enter">
+        </div>
+        <div class="tag-list" id="playerTags"></div>
+      </div>
+
+      <span class="field-label">Categories in the deck</span>
+      <div class="chip-row" id="catChips"></div>
+
+      <div class="toggle-row">
+        <div><strong>Discussion timer</strong><span>Adds a countdown ring you can start on each card</span></div>
+        <button class="switch" id="timerSwitch" type="button" aria-pressed="false"></button>
+      </div>
+
+      <button class="start-btn" id="startBtn" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z"/></svg>
+        Start the deck
+      </button>
+      <p class="start-hint" id="deckCountHint"></p>
+    </div>
+  </section>
+
+  <!-- PLAY SCREEN -->
+  <section id="playScreen" class="play-grid hidden">
+    <aside class="panel rail">
+      <h4>This session</h4>
+      <div class="stat-row"><span>Cards drawn</span><strong id="statDrawn">0</strong></div>
+      <div class="stat-row"><span>Remaining</span><strong id="statRemaining">0</strong></div>
+      <div class="stat-row"><span>Streak</span><strong id="statStreak">0</strong></div>
+
+      <h4 style="margin-top:22px;">How to play</h4>
+      <ol class="howto-list">
+        <li><strong>Draw</strong><span>Pull the next card — question and tips show right away.</span></li>
+        <li><strong>Talk</strong><span>Answer, discuss, or pass to the next person.</span></li>
+        <li><strong>Note</strong><span>Save a takeaway in the panel on the right.</span></li>
+        <li><strong>Keep going</strong><span>Draw again — the deck reshuffles once you've seen every card.</span></li>
+      </ol>
+
+      <button class="exit-btn" id="exitBtn" type="button">End session</button>
+    </aside>
+
+    <div class="stage-col">
+      <div class="turn-chip hidden" id="turnChip">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span id="turnName">—</span>
+      </div>
+
+      <div class="table">
+        <div class="mini-deck" id="miniDeck">
+          <div class="msc"></div>
+          <div class="msc"></div>
+          <div class="msc" id="miniDeckCount">150</div>
+        </div>
+        <div class="card-zone">
+          <div class="game-card" id="gameCard">
+            <div class="card-top">
+              <div class="ftop">
+                <span class="cat-pill" id="frontCatPill"><svg id="frontCatIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"></svg><span id="frontCatName"></span></span>
+                <div class="card-motif"><svg id="frontMotif" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></svg></div>
+              </div>
+              <p class="card-idx" id="frontIndex"></p>
+              <p class="card-title" id="frontTitle"></p>
+              <p class="question" id="backQuestion"></p>
+            </div>
+            <div class="card-bottom">
+              <div class="timer-wrap hidden" id="timerWrap">
+                <svg class="ring" viewBox="0 0 40 40"><circle class="track" cx="20" cy="20" r="16"/><circle class="prog" id="ringProg" cx="20" cy="20" r="16" stroke-dasharray="100.5" stroke-dashoffset="0"/></svg>
+                <span class="timer-label" id="timerLabel">60s</span>
+                <button class="timer-btn" id="timerBtn" type="button">Start</button>
+              </div>
+              <p class="tips-heading">Facilitation tips</p>
+              <ul class="tips" id="tipsList"></ul>
+              <div class="follow"><strong>Go deeper</strong><span id="followText"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl-btn primary" id="drawBtn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Draw next card</button>
+      </div>
+      <p class="hint-line">Press Enter to draw the next card · the deck reshuffles automatically so you can keep playing</p>
+    </div>
+
+    <aside class="panel side">
+      <div class="mode-guidance">
+        <div class="mg-top"><span class="dot"></span><span class="sub" style="margin:0;" id="mgLabel">Current play style</span></div>
+        <h5 id="mgTitle">Solo</h5>
+        <p id="mgDesc"></p>
+      </div>
+
+      <h4 id="sideTitle">Private note</h4>
+      <p class="sub" id="sideSub">Jot a takeaway from this card.</p>
+      <textarea class="note-area" id="noteArea" placeholder="What stood out to you?"></textarea>
+      <button class="save-note" id="saveNoteBtn" type="button">Save note</button>
+
+      <details style="margin-top:16px;">
+        <summary class="log-head"><strong>View saved notes</strong><span class="log-count" id="noteCount">0</span></summary>
+        <div class="log" id="noteLog"></div>
+      </details>
+    </aside>
+  </section>
+
+  <!-- END SCREEN -->
+  <section id="endScreen" class="panel end-panel hidden">
+    <div class="end-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.6L22 9l-5 4.9 1.4 7.1L12 17.8 5.6 21l1.4-7.1L2 9l7.4-.4z"/></svg></div>
+    <h2>Session complete.</h2>
+    <p style="color:var(--ink-dim); max-width:420px; margin:8px auto 0;">Nice round. Start again whenever you're ready — the deck keeps reshuffling for as long as you want to play.</p>
+    <div class="end-stats">
+      <div class="end-stat"><strong id="endDrawn">0</strong><span>cards explored</span></div>
+      <div class="end-stat"><strong id="endCats">0</strong><span>categories touched</span></div>
+      <div class="end-stat"><strong id="endStreak">0</strong><span>best streak</span></div>
+    </div>
+    <button class="start-btn" id="reshuffleBtn" type="button" style="max-width:280px; margin:26px auto 0;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4M3 12.1v-2a4 4 0 014-4h14M7 21.9l-4-4 4-4M21 11.9v2a4 4 0 01-4 4H3"/></svg>
+      Reshuffle the deck
+    </button>
+  </section>
+
+</div>
+</div>
+
+<div class="toast" id="toast"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.6L22 9l-5 4.9 1.4 7.1L12 17.8 5.6 21l1.4-7.1L2 9l7.4-.4z"/></svg><span id="toastText"></span></div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const CATS = [
+  { key:"warmup", name:"Warm-Up", icon:"sparkles", a:"#0ea678", b:"#3fe6ab",
+    tips:["Cap the answer at one minute.","Curiosity over comparison.","'Pass' is always fine.","Let the first answer that comes to mind win.","Smile — this one's meant to be easy.","No wrong answers here.","Ask 'why' once if you want more.","Keep it light; save the deep stuff for later cards.","Everyone answers, even the quiet ones."],
+    follow:["What did you learn that you wouldn't have guessed?","Who gave the answer that surprised you most?","What's one thing you have in common with someone else's answer?","Would your answer have been different a year ago?"],
+    prompts:[
+      ["Small Joy","What small thing made your day better recently?"],
+      ["Perfect Pause","If you had one free hour today, how would you spend it?"],
+      ["Desk Companion","What object near you has a story worth telling?"],
+      ["First Choice","What simple choice always lifts your mood?"],
+      ["Local Favourite","What place nearby would you happily recommend?"],
+      ["Soundtrack","What song shifts you into a good mood?"],
+      ["Unexpected Skill","What everyday skill are you quietly proud of?"],
+      ["Best Break","What does a genuinely refreshing break look like for you?"],
+      ["Good Question","What question do you wish people asked more often?"],
+      ["Tiny Win","What's one small win you've had this week?"],
+      ["Morning Ritual","What part of your morning do you actually enjoy?"],
+      ["New Lens","What's something you've changed your mind about?"],
+      ["Favourite Season","Which season suits you best, and why?"],
+      ["Curious Choice","What would you love to learn just for fun?"],
+      ["Good Energy","What makes a room feel welcoming to you?"]
+    ]},
+  { key:"self", name:"Self-Awareness", icon:"scan-face", a:"#7c3aed", b:"#a985ff",
+    tips:["Name what's true without judging it.","Use a small, recent example.","Look for a pattern, not perfection.","There's no need to have it all figured out.","Notice the feeling before the explanation.","It's fine to think out loud here.","Compare today's answer to how you'd have answered a year ago.","Let silence sit — good answers take a moment.","Ask what would need to be true for this to change."],
+    follow:["What's one small adjustment you'd try next time?","What would someone who knows you well say about this?","How would you know if this had already changed?","What's the smallest sign of progress you'd notice?"],
+    prompts:[
+      ["Energy Map","What kind of work energises you, even when it's hard?"],
+      ["Focus Signal","What conditions help you focus at your best?"],
+      ["Feedback Style","How do you prefer to receive useful feedback?"],
+      ["Pressure Pattern","What's a healthy way you reset when pressure builds?"],
+      ["Strength in Action","What strength do people rely on you for?"],
+      ["Learning Edge","What capability are you currently building?"],
+      ["Boundary Builder","What boundary helps you do your best work?"],
+      ["Values Check","What value guides you when a decision is hard?"],
+      ["Motivation Clue","What makes a goal feel meaningful to you?"],
+      ["Working Rhythm","When are you usually sharpest for deep thinking?"],
+      ["Helpful Habit","What routine makes your week run more smoothly?"],
+      ["Perspective Shift","What helps you see a situation from another angle?"],
+      ["Confidence Cue","What helps you feel ready before a challenge?"],
+      ["Contribution","What do you most want to be known for?"],
+      ["Pause Point","What tells you it's time to pause and reassess?"]
+    ]},
+  { key:"connection", name:"Connection", icon:"heart-handshake", a:"#2f6fed", b:"#5b96ff",
+    tips:["Listen for the value behind the answer.","Acknowledge before adding your view.","Look for one point of overlap.","Resist the urge to immediately relate it back to yourself.","A follow-up question shows you were listening.","Let quieter voices go first if it's a group.","Notice what's not being said too.","Reflect back what you heard before responding.","Warmth matters more than the perfect response."],
+    follow:["What could help this connection continue past today?","What did this answer tell you about what this person values?","How is your own answer different from theirs?","What's one small way to check in on this later?"],
+    prompts:[
+      ["Common Ground","What experience has shaped how you work with others?"],
+      ["Welcome Sign","What helps you feel included in a new group?"],
+      ["Support Signal","How can people tell you need support?"],
+      ["Shared Success","What makes a collaboration feel successful to you?"],
+      ["Trust Builder","What small action builds trust quickly for you?"],
+      ["Generous Assumption","What generous assumption do you try to make about others?"],
+      ["Meaningful Thanks","What kind of appreciation feels most meaningful to you?"],
+      ["Bridge Builder","How do you reconnect after a misunderstanding?"],
+      ["Different View","What helps you stay open when someone sees things differently?"],
+      ["Community Spark","What makes a group feel like a community?"],
+      ["Better Welcome","How can we welcome the quieter voices in a room?"],
+      ["Conversation Door","What topic opens a meaningful but easy conversation?"],
+      ["Reliable Moment","When did a teammate really show up for you?"],
+      ["Shared Care","What does care look like in a working relationship?"],
+      ["Human First","What helps you remember the person behind the role?"]
+    ]},
+  { key:"leadership", name:"Leadership", icon:"compass", a:"#5b3df0", b:"#9b6bff",
+    tips:["Clarify the outcome before the method.","Share context, not just instructions.","Invite ownership and questions.","Ask what's getting in the way before offering a fix.","Model the behaviour you want to see, not just describe it.","Give credit specifically, not generically.","Check assumptions before assigning blame.","Leave room for someone else's idea to win.","A good leadership answer usually names a next action."],
+    follow:["What would make the next step clearer for everyone involved?","Who else should be part of this decision?","What would you do differently if you had to explain this to a new hire?","What's the smallest signal that this is working?"],
+    prompts:[
+      ["Clear North Star","How would you describe the purpose behind your current work?"],
+      ["Decision Lens","What information do you need before a good decision?"],
+      ["Lead by Example","What behaviour do you hope others pick up from you?"],
+      ["Quiet Leadership","How can someone lead without having the loudest voice?"],
+      ["Shared Ownership","What task could you turn into a shared opportunity?"],
+      ["Useful Courage","What respectful conversation is worth having sooner?"],
+      ["Context First","When does your team need more context from you?"],
+      ["Recognition Moment","Who deserves specific recognition, and for what?"],
+      ["Steady Change","What helps people stay grounded during change?"],
+      ["Decision Review","How can a team learn from a decision that didn't land?"],
+      ["Leadership Habit","What practice would help this group lead more consistently?"],
+      ["Invite Input","Whose perspective might improve the next decision?"],
+      ["Priority Signal","How do you show what matters most right now?"],
+      ["Enable Others","What could you make easier for someone else to lead?"],
+      ["Future Team","What capability should this group build for the future?"]
+    ]},
+  { key:"teamwork", name:"Teamwork", icon:"users", a:"#0f9f7a", b:"#34d1a4",
+    tips:["Make roles and handoffs visible.","Focus on the work, not personalities.","End with one shared commitment.","Ask what 'good' looks like before starting.","Name the strength each person brings.","Check that quieter teammates got a turn to speak.","Separate the idea from who said it.","Write the agreement down before moving on.","Ask what could get in the way of following through."],
+    follow:["What's one agreement the team can carry into its next task?","Who's best placed to own the next step?","What would make this easier to repeat next time?","How will the team know this worked?"],
+    prompts:[
+      ["Best Blend","What different strength makes a team more effective?"],
+      ["Role Clarity","What do you need from teammates to do your part well?"],
+      ["Handoff","What makes a handoff between people feel seamless?"],
+      ["Team Signal","How do you know a team is working well together?"],
+      ["Useful Check-In","What question should a team ask at the start of a project?"],
+      ["Shared Standard","What quality standard should everyone understand from day one?"],
+      ["Help Request","What makes it easier to ask a teammate for help?"],
+      ["Productive Conflict","What helps a disagreement stay constructive?"],
+      ["Momentum","What small practice keeps a team moving forward?"],
+      ["Finish Strong","What should a team do before calling work complete?"],
+      ["Team Reset","What's a fair way to reset after a hard week?"],
+      ["Collaboration Choice","What task works better done together than alone?"],
+      ["Room for All","How can a team make room for different working styles?"],
+      ["Mutual Accountability","What does supportive accountability look like?"],
+      ["Celebrate Together","How should a team celebrate progress along the way?"]
+    ]},
+  { key:"comm", name:"Communication", icon:"messages-square", a:"#1f7ae0", b:"#4fb4ff",
+    tips:["Say the purpose first.","Use a concrete example when useful.","Check what the other person heard.","Ask before assuming the tone was intentional.","Shorter is usually clearer.","Name the outcome you want from the message.","Read it back before sending, out loud if you can.","One idea per message beats five in one.","Ask what's the one thing that must land."],
+    follow:["What wording could make your next message clearer?","Where might this be misread, and by whom?","What would you cut if you had half the words?","How would you say this differently in person versus in writing?"],
+    prompts:[
+      ["Clear Ask","What makes a request clear enough to act on?"],
+      ["Listening Move","What's one way to show you're truly listening?"],
+      ["Meeting Meaning","What would make your next meeting more worthwhile?"],
+      ["Helpful Update","What belongs in a genuinely useful progress update?"],
+      ["Assumption Check","When is it worth checking an assumption out loud?"],
+      ["Kind Directness","How can you be both clear and considerate?"],
+      ["Question Craft","What question could surface a hidden concern?"],
+      ["Channel Choice","How do you decide whether to message, call, or meet?"],
+      ["Plain Language","What jargon could you swap for simpler words?"],
+      ["Response Space","How can you make it easier for someone to respond honestly?"],
+      ["Meeting Close","What should every good meeting end with?"],
+      ["Feedback Loop","What turns feedback into a two-way conversation?"],
+      ["Tone Check","What do you do when written tone might land wrong?"],
+      ["Summary Skill","How would you sum up a complex point in one sentence?"],
+      ["Speak Up","What makes it safer for people to raise a concern?"]
+    ]},
+  { key:"creativity", name:"Creativity", icon:"lightbulb", a:"#8b3ff0", b:"#b98bff",
+    tips:["Generate first; evaluate later.","Borrow inspiration from another field.","Shrink the idea until it's testable.","Quantity beats quality in the first round.","Say the obvious idea out loud, then go past it.","Combine two answers from the group into one.","Sketch it if words are getting in the way.","Ask 'what else' at least twice.","Bad ideas are allowed — they lead somewhere."],
+    follow:["What's the smallest experiment you could run this week?","What would you try if failure were free?","Which idea deserves ten more minutes right now?","What's the version of this idea nobody's said yet?"],
+    prompts:[
+      ["Fresh Start","How would you approach a familiar task as if it were brand new?"],
+      ["Constraint Spark","What idea might emerge if you had half the usual resources?"],
+      ["Different Audience","How would your idea change for a totally different audience?"],
+      ["Reverse It","What happens if you reverse the usual order of this process?"],
+      ["Ten Ideas","Could you list ten possible solutions before choosing one?"],
+      ["Borrow a Lens","What would a teacher, chef, or designer do with this challenge?"],
+      ["Make It Visible","How could you sketch or map this instead of only discussing it?"],
+      ["Better Question","What more interesting question sits beneath the obvious one?"],
+      ["Unexpected Pair","What two unrelated ideas could you combine?"],
+      ["Future Memory","Imagine this worked brilliantly — what did you do differently?"],
+      ["Simple Prototype","What could you make or test in under thirty minutes?"],
+      ["Permission Slip","What idea would you explore if it didn't need to be perfect?"],
+      ["Change Scale","Would this look different if it were ten times smaller?"],
+      ["Idea Garden","Which unfinished idea deserves more attention?"],
+      ["Playful Test","How could you make the next experiment more playful?"]
+    ]},
+  { key:"challenges", name:"Challenges", icon:"mountain", a:"#1d3fa8", b:"#3f5fd6",
+    tips:["Separate facts from interpretations.","Break it into one next step.","Ask what support already exists.","Name the real constraint, not the assumed one.","Ask what's actually in your control here.","Look for the smallest version of a solution first.","Check whether this needs a decision or just a conversation.","Don't solve it fully — just find the next move.","Ask who's dealt with something similar before."],
+    follow:["What's one action you could take in the next 48 hours?","What would 'good enough for now' look like?","Who could you ask for a second opinion on this?","What's the cost of waiting versus acting now?"],
+    prompts:[
+      ["First Step","What's the smallest useful step toward a current challenge?"],
+      ["Obstacle Map","What obstacle is real, and what's an assumption?"],
+      ["Resourceful Move","What resource do you already have that could help?"],
+      ["Plan B","What's a practical alternative if the first plan changes?"],
+      ["Useful Reframe","What might this challenge be teaching you or the team?"],
+      ["Ask Earlier","Who could you involve earlier to improve the outcome?"],
+      ["Time Box","What would you try with just twenty focused minutes?"],
+      ["Risk Balance","What's the realistic upside and manageable downside of trying?"],
+      ["Progress Marker","What evidence would show you're moving forward?"],
+      ["Roadblock Conversation","What conversation could remove a current roadblock?"],
+      ["Resilience Practice","What helps you regain momentum after a setback?"],
+      ["Scope Check","What could be simplified without losing the goal?"],
+      ["Learn Fast","What could you test before a bigger commitment?"],
+      ["Steady Pace","What would sustainable progress look like here?"],
+      ["Next Right Move","What's the next right move, not the whole solution?"]
+    ]},
+  { key:"reflection", name:"Reflection", icon:"moon-star", a:"#4634c7", b:"#7c6df0",
+    tips:["Use specifics over general impressions.","Notice progress and possibility both.","Leave with one kind, realistic insight.","Give it a moment of quiet before answering.","It's fine if the honest answer is 'not much yet.'","Compare this to how you'd have answered before.","Write it down if it's worth remembering.","Notice what surprised you, not just what confirmed what you knew.","Let the answer be unfinished — that's still useful."],
+    follow:["What do you want to carry forward from this?","What would you tell yourself from a month ago?","What's one word that sums up how this feels?","Who else should hear this reflection?"],
+    prompts:[
+      ["Recent Learning","What did you learn recently that changed how you work?"],
+      ["Proud Moment","What's one recent moment you handled well?"],
+      ["Useful Surprise","What surprised you in a good way this month?"],
+      ["Pattern Notice","What pattern have you noticed in how you work or relate?"],
+      ["Thankful Detail","What small detail are you grateful for today?"],
+      ["Better Than Before","What feels easier now than six months ago?"],
+      ["Meaningful Effort","What effort has been worth making, even without full results yet?"],
+      ["Release","What unhelpful expectation could you set down?"],
+      ["Lesson Kept","What lesson from a past project still helps you today?"],
+      ["Moment of Care","When did someone make you feel truly seen?"],
+      ["Change Noticed","What positive change have you noticed around you?"],
+      ["Pause and Notice","What's going well that deserves more attention?"],
+      ["Perspective Gift","What perspective has someone else helped you see?"],
+      ["Contribution Review","How have you made a positive difference lately?"],
+      ["Tomorrow's Note","What would your future self thank you for doing today?"]
+    ]},
+  { key:"growth", name:"Growth", icon:"sprout", a:"#149461", b:"#2fce8f",
+    tips:["Choose progress over intensity.","Make the next action observable.","Build support around the habit.","Keep the first step embarrassingly small.","Tie it to something you already do daily.","Ask what's worked before, even in a different area.","Progress counts even when it's slow.","Name who could check in on this with you.","Pick one thing, not five, to focus on."],
+    follow:["What will help you remember and follow through?","What would 'one percent better' look like this week?","Who's someone you could learn this from?","What's stopped this from sticking in the past?"],
+    prompts:[
+      ["One Percent","What tiny improvement would matter a lot over time?"],
+      ["Skill Stretch","What skill would make your work more effective?"],
+      ["Learning Plan","How do you learn best when trying something new?"],
+      ["Brave Beginner","What are you willing to be a beginner at?"],
+      ["Feedback Fuel","What feedback could help you grow right now?"],
+      ["Practice Loop","What regular practice would strengthen a skill you value?"],
+      ["Growth Partner","Who could be a helpful learning partner for you?"],
+      ["Habit Cue","What existing routine could remind you to practise something new?"],
+      ["Future Capability","What capability will matter more in your next chapter?"],
+      ["Progress Evidence","How will you notice growth before reaching the goal?"],
+      ["Stretch Zone","What challenge sits just outside your comfort zone?"],
+      ["Learn Out Loud","What could you share while you're still learning it?"],
+      ["Curiosity Habit","What topic would you like to explore more deeply?"],
+      ["Action Commitment","What's one action you'll take before this week ends?"],
+      ["Keep Growing","What does sustainable growth mean to you?"]
+    ]}
+];
+
+const ICONS = {
+  sparkles:'<path d="M12 3l1.6 4.8L18 9l-4.4 1.7L12 15l-1.6-4.3L6 9l4.4-1.2z"/><path d="M5 17l.8 2.2L8 20l-2.2.8L5 23l-.8-2.2L2 20l2.2-.8z"/><path d="M19 15l.6 1.6L21 17l-1.4.6L19 19l-.6-1.4L17 17l1.4-.4z"/>',
+  "scan-face":'<path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><path d="M9 10h.01M15 10h.01"/><path d="M9.5 15a3.5 3.5 0 005 0"/>',
+  "heart-handshake":'<path d="M19 14c1.5-1.5 3-3.5 3-5.5A4.5 4.5 0 0017.5 4c-1.5 0-2.7.7-3.5 1.7C13.2 4.7 12 4 10.5 4A4.5 4.5 0 006 8.5c0 2 1.5 4 3 5.5l6 5.5z"/><path d="M2 15l4-4 3 3-2 2 2 2-3 3-4-4z"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/>',
+  users:'<path d="M17 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
+  "messages-square":'<path d="M14 9a2 2 0 01-2 2H7l-4 3V6a2 2 0 012-2h7a2 2 0 012 2z"/><path d="M18 8h1a2 2 0 012 2v6l-3-2h-5a2 2 0 01-2-2"/>',
+  lightbulb:'<path d="M9 18h6M10 22h4M15.09 14c.59-.6.98-1.34 1.15-2.15a5 5 0 10-8.48 0c.17.81.56 1.55 1.15 2.15A5 5 0 009 17h6a5 5 0 00.09-3z"/>',
+  mountain:'<path d="M8 21l4-13 4 13"/><path d="M2 21l6-14 4 8"/><path d="M14 12l3-6 5 15"/>',
+  "moon-star":'<path d="M12 3a6 6 0 109 9 9 9 0 11-9-9z"/><path d="M19 3v4M17 5h4"/>',
+  sprout:'<path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12S7 12 7 6c6 0 5 6 5 6z"/><path d="M12 12s5 0 5-6c-6 0-5 6-5 6z"/>'
+};
+
+let ALL_CARDS = [];
+let n = 1;
+CATS.forEach(cat => {
+  cat.prompts.forEach(([title, q]) => {
+    ALL_CARDS.push({ id:"c"+n, n, cat, title, q });
+    n++;
+  });
+});
+const TOTAL = ALL_CARDS.length;
+
+/* ---------------- STATE ---------------- */
+const $ = id => document.getElementById(id);
+const KEY = "connect-lead-v2";
+const deviceDefaultTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+let state = JSON.parse(localStorage.getItem(KEY) || "null") || {
+  mode:"solo", players:[], activeCats: CATS.map(c=>c.key), timerOn:false,
+  used:[], drawn:0, streak:0, bestStreak:0, catsTouched:[], turnIdx:0, theme: deviceDefaultTheme
+};
+if(state.theme!=="light" && state.theme!=="dark") state.theme = deviceDefaultTheme;
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
+let currentCard = null;
+let timerHandle = null;
+let timerSeconds = 60;
+
+/* ---------------- THEME (light / dark only) ---------------- */
+function applyTheme(){
+  document.documentElement.setAttribute("data-theme", state.theme);
+  $("themeLight").classList.toggle("active", state.theme==="light");
+  $("themeDark").classList.toggle("active", state.theme==="dark");
+}
+$("themeLight").addEventListener("click", ()=>{ state.theme="light"; save(); applyTheme(); });
+$("themeDark").addEventListener("click", ()=>{ state.theme="dark"; save(); applyTheme(); });
+
+/* ---------------- START SCREEN SETUP ---------------- */
+function renderModeGrid(){
+  document.querySelectorAll(".mode-card").forEach(btn=>{
+    btn.classList.toggle("active", btn.dataset.mode===state.mode);
+  });
+  $("playersBlock").classList.toggle("hidden", !(state.mode==="group"||state.mode==="pairs"));
+}
+document.querySelectorAll(".mode-card").forEach(btn=>{
+  btn.addEventListener("click", ()=>{ state.mode = btn.dataset.mode; save(); renderModeGrid(); });
+});
+
+function renderPlayerTags(){
+  $("playerTags").innerHTML = state.players.map((p,i)=>`
+    <span class="tag">${p}<button type="button" data-i="${i}" aria-label="Remove ${p}">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button></span>`).join("");
+  $("playerTags").querySelectorAll("button").forEach(b=>{
+    b.addEventListener("click", ()=>{ state.players.splice(+b.dataset.i,1); save(); renderPlayerTags(); });
+  });
+}
+$("playerInput").addEventListener("keydown", e=>{
+  if(e.key==="Enter" && e.target.value.trim()){
+    state.players.push(e.target.value.trim());
+    e.target.value="";
+    save(); renderPlayerTags();
+  }
+});
+
+function renderCatChips(){
+  $("catChips").innerHTML = CATS.map(c=>`
+    <button type="button" class="chip ${state.activeCats.includes(c.key)?'active':''}" data-key="${c.key}" style="--dot:${c.a}">
+      <span class="dot"></span>${c.name}
+    </button>`).join("");
+  $("catChips").querySelectorAll(".chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      const k = chip.dataset.key;
+      if(state.activeCats.includes(k)){
+        if(state.activeCats.length>1) state.activeCats = state.activeCats.filter(x=>x!==k);
+      } else state.activeCats.push(k);
+      save(); renderCatChips(); updateDeckHint();
+    });
+  });
+}
+
+function updateDeckHint(){
+  const count = ALL_CARDS.filter(c=>state.activeCats.includes(c.cat.key)).length;
+  $("deckCountHint").textContent = `${count} card${count===1?'':'s'} in this deck`;
+}
+
+$("timerSwitch").addEventListener("click", ()=>{
+  state.timerOn = !state.timerOn;
+  $("timerSwitch").classList.toggle("on", state.timerOn);
+  save();
+});
+
+/* ---------------- SESSION ---------------- */
+function availableCards(){
+  return ALL_CARDS.filter(c => state.activeCats.includes(c.cat.key) && !state.used.includes(c.id));
+}
+
+function startSession(){
+  $("startScreen").classList.add("hidden");
+  $("endScreen").classList.add("hidden");
+  $("playScreen").classList.remove("hidden");
+  $("timerWrap").classList.toggle("hidden", !state.timerOn);
+  updateSideCopy();
+  updateRail();
+  updateTurnChip();
+  drawCard();
+}
+
+const MODE_COPY = {
+  solo: { title:"Solo reflection", desc:"Draw a prompt, take your time, and save a private insight you'd like to revisit later.",
+    side:["Private note","Jot a takeaway from this card."] },
+  pairs: { title:"Pairs", desc:"One card, two people. Take turns answering, then compare what came up for each of you.",
+    side:["Shared note","Capture whatever the two of you want to remember from this card."] },
+  group: { title:"Group conversation", desc:"Draw one shared prompt. Invite every voice and leave room for passes before moving to the next card.",
+    side:["Table notes","Anyone can jot down a highlight from the round."] },
+  facilitator: { title:"Facilitator", desc:"Run a guided session with the discussion timer on. Use the notes panel to track what's worth bringing back to the group.",
+    side:["Facilitator notes","Track observations to bring back to the group later."] }
+};
+function updateSideCopy(){
+  const m = MODE_COPY[state.mode] || MODE_COPY.solo;
+  $("mgTitle").textContent = m.title;
+  $("mgDesc").textContent = m.desc;
+  $("sideTitle").textContent = m.side[0];
+  $("sideSub").textContent = m.side[1];
+}
+
+function updateTurnChip(){
+  const showTurns = (state.mode==="group") && state.players.length>0;
+  $("turnChip").classList.toggle("hidden", !showTurns);
+  if(showTurns) $("turnName").textContent = state.players[state.turnIdx % state.players.length] + "'s turn";
+}
+
+function updateRail(){
+  $("statDrawn").textContent = state.drawn;
+  $("statRemaining").textContent = availableCards().length;
+  $("statStreak").textContent = state.streak;
+}
+
+function showToast(text){
+  $("toastText").textContent = text;
+  $("toast").classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> $("toast").classList.remove("show"), 2600);
+}
+
+function drawCard(){
+  let pool = availableCards();
+  if(!pool.length){
+    state.used = state.used.filter(id=>{
+      const c = ALL_CARDS.find(x=>x.id===id);
+      return c && !state.activeCats.includes(c.cat.key);
+    });
+    save();
+    pool = availableCards();
+    showToast("Full round complete — reshuffling for another lap");
+  }
+  const card = pool[Math.floor(Math.random()*pool.length)];
+  state.used.push(card.id);
+  state.drawn++;
+  state.streak++;
+  state.bestStreak = Math.max(state.bestStreak, state.streak);
+  if(!state.catsTouched.includes(card.cat.key)) state.catsTouched.push(card.cat.key);
+  if(state.mode==="group" && state.players.length){ state.turnIdx++; }
+  save();
+  currentCard = card;
+  renderCard(card);
+  updateRail();
+  updateTurnChip();
+}
+
+function sample(arr, n){
+  const copy = arr.slice();
+  const out = [];
+  while(out.length < n && copy.length){
+    out.push(copy.splice(Math.floor(Math.random()*copy.length),1)[0]);
+  }
+  return out;
+}
+
+function renderCard(card){
+  stopTimer();
+  const gc = $("gameCard");
+  gc.classList.remove("dealt");
+  void gc.offsetWidth;
+  gc.classList.add("dealt");
+
+  gc.style.setProperty("--cat-a", card.cat.a);
+  gc.style.setProperty("--cat-b", card.cat.b);
+
+  $("frontCatName").textContent = card.cat.name;
+  $("frontCatIcon").innerHTML = ICONS[card.cat.icon];
+  $("frontIndex").textContent = `CARD ${String(card.n).padStart(3,"0")} / ${TOTAL}`;
+  $("frontMotif").innerHTML = ICONS[card.cat.icon];
+  $("frontTitle").textContent = card.title;
+  $("backQuestion").textContent = card.q;
+
+  $("tipsList").innerHTML = sample(card.cat.tips, 3).map(t=>`<li>${t}</li>`).join("");
+  $("followText").textContent = sample(card.cat.follow, 1)[0];
+
+  $("miniDeckCount").textContent = availableCards().length;
+  resetTimerUI();
+  $("noteArea").value = "";
+}
+
+/* timer ring */
+const RING_CIRC = 2*Math.PI*16;
+function resetTimerUI(){
+  timerSeconds = 60;
+  $("ringProg").setAttribute("stroke-dasharray", RING_CIRC.toFixed(1));
+  $("ringProg").setAttribute("stroke-dashoffset", "0");
+  $("timerLabel").textContent = "60s";
+  $("timerBtn").textContent = "Start";
+}
+function stopTimer(){
+  clearInterval(timerHandle); timerHandle=null;
+}
+function toggleTimer(){
+  if(timerHandle){ stopTimer(); $("timerBtn").textContent="Start"; return; }
+  if(timerSeconds<=0) resetTimerUI();
+  $("timerBtn").textContent = "Pause";
+  timerHandle = setInterval(()=>{
+    timerSeconds--;
+    const pct = timerSeconds/60;
+    $("ringProg").setAttribute("stroke-dashoffset", (RING_CIRC*(1-pct)).toFixed(1));
+    $("timerLabel").textContent = Math.max(timerSeconds,0)+"s";
+    if(timerSeconds<=0){
+      stopTimer();
+      $("timerBtn").textContent="Start";
+      showToast("Time's up — wrap the thought");
+    }
+  },1000);
+}
+
+function endSession(){
+  $("playScreen").classList.add("hidden");
+  $("endScreen").classList.remove("hidden");
+  $("endDrawn").textContent = state.drawn;
+  $("endCats").textContent = state.catsTouched.length;
+  $("endStreak").textContent = state.bestStreak;
+}
+
+function resetDeckKeepSetup(){
+  state.used = state.used.filter(id=>{
+    const c = ALL_CARDS.find(x=>x.id===id);
+    return c && !state.activeCats.includes(c.cat.key);
+  });
+}
+
+/* ---------------- WIRE UP ---------------- */
+$("startBtn").addEventListener("click", ()=>{
+  state.streak = 0; save();
+  startSession();
+});
+$("drawBtn").addEventListener("click", drawCard);
+$("timerBtn").addEventListener("click", toggleTimer);
+$("exitBtn").addEventListener("click", ()=>{
+  stopTimer();
+  endSession();
+});
+$("reshuffleBtn").addEventListener("click", ()=>{
+  resetDeckKeepSetup();
+  state.streak = 0;
+  save();
+  $("endScreen").classList.add("hidden");
+  $("startScreen").classList.remove("hidden");
+});
+
+let savedNotes = JSON.parse(localStorage.getItem(KEY+"-notes") || "[]");
+function renderNoteLog(){
+  $("noteCount").textContent = savedNotes.length;
+  const log = $("noteLog");
+  if(!savedNotes.length){
+    log.innerHTML = `<p class="empty-log">No saved notes yet.</p>`;
+    return;
+  }
+  log.innerHTML = savedNotes.slice().reverse().map((note,i)=>`
+    <div class="log-item">
+      <div class="log-item-row">
+        <div>
+          <p>Card ${note.cardN} · ${note.title}</p>
+          <span>${note.text.replace(/</g,"&lt;")}</span>
+        </div>
+        <div class="log-actions">
+          <button type="button" class="copy-btn" data-act="copy" data-i="${savedNotes.length-1-i}" title="Copy note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+          <button type="button" class="copy-btn" data-act="delete" data-i="${savedNotes.length-1-i}" title="Delete note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M6 7l1 13a2 2 0 002 2h6a2 2 0 002-2l1-13"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>`).join("");
+  log.querySelectorAll(".copy-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const note = savedNotes[+btn.dataset.i];
+      if(btn.dataset.act==="copy"){
+        const text = `Card ${note.cardN} · ${note.title}\n${note.text}`;
+        if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>showToast("Note copied"));
+      } else {
+        savedNotes.splice(+btn.dataset.i,1);
+        localStorage.setItem(KEY+"-notes", JSON.stringify(savedNotes));
+        renderNoteLog();
+        showToast("Note deleted");
+      }
+    });
+  });
+}
+$("saveNoteBtn").addEventListener("click", ()=>{
+  const text = $("noteArea").value.trim();
+  if(!text || !currentCard) return;
+  savedNotes.push({ cardN: currentCard.n, title: currentCard.title, text });
+  localStorage.setItem(KEY+"-notes", JSON.stringify(savedNotes));
+  renderNoteLog();
+  $("noteArea").value = "";
+  showToast("Note saved");
+});
+
+document.addEventListener("keydown", e=>{
+  if($("playScreen").classList.contains("hidden")) return;
+  if(e.target.tagName==="TEXTAREA" || e.target.tagName==="INPUT") return;
+  if(e.key==="Enter"){ e.preventDefault(); drawCard(); }
+});
+
+/* ---------------- INIT ---------------- */
+applyTheme();
+renderModeGrid();
+renderPlayerTags();
+renderCatChips();
+updateDeckHint();
+$("timerSwitch").classList.toggle("on", state.timerOn);
+renderNoteLog();
+lucide && lucide.createIcons && lucide.createIcons();
+</script>
+</body>
+</html>
